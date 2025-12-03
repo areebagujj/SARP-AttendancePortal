@@ -86,6 +86,20 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('viewContainer').innerHTML = UIModule.getBroadcastFormHTML(StorageModule.getCourses().find(c=>c.id==id));
         }
         
+        // --- NEW: Handle History Views ---
+        if (e.target.closest('.view-teacher-history')) {
+            const id = e.target.closest('button').dataset.courseId;
+            const course = StorageModule.getCourses().find(c => c.id == id);
+            document.getElementById('viewContainer').innerHTML = UIModule.getTeacherHistoryView(course);
+        }
+
+        if (e.target.closest('.view-student-history')) {
+            const id = e.target.closest('button').dataset.courseId;
+            const course = StorageModule.getCourses().find(c => c.id == id);
+            document.getElementById('viewContainer').innerHTML = UIModule.getStudentHistoryView(course, user);
+        }
+        // ---------------------------------
+
         // Navigation Back
         if (e.target.closest('.back-btn')) initDashboard(user);
         
